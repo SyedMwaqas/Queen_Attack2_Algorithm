@@ -1,0 +1,202 @@
+import java.io.*;
+import java.math.*;
+import java.security.*;
+import java.text.*;
+import java.util.*;
+import java.util.concurrent.*;
+import java.util.regex.*;
+
+
+
+    
+public class JavaApplication45 {
+
+    
+
+    static int cnt=0; 
+    static int column = 0;
+    static int n;
+   
+    
+   public static int checkConstraints(int Q_boxes[][],int row,int col) 
+    { 
+            int i, j; 
+  
+       
+        //Check Left Upper Diagonal
+  for ( i = row-1, j = col-1; i >= 1 && j >= 1; i--, j--) {
+      
+    if(Q_boxes[i][j] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+      
+   
+  }
+
+  //Check Right Upper Diagonal
+  for ( i = row-1, j = col+1; i >= 1 && j <=n ; i--, j++) {
+    
+      
+   if(Q_boxes[i][j] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  }
+//
+  //Check in same Column
+  for (i = col-1; i >= 1; i--) {
+      if(Q_boxes[row][i] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  
+  }
+  
+  
+  for (i = col+1; i<= n; i++) {
+    if(Q_boxes[row][i] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  
+  }
+  
+  
+  for (i = row-1; i>=1 ; i--){
+       if(Q_boxes[i][col] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  }
+  
+  for (i = row+1; i<=n ; i++){
+      if(Q_boxes[i][col] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  }
+        
+
+         //Check Left Upper Diagonal
+  for ( i = row+1, j = col+1; i <= n && j <=n; i++, j++) {
+      
+    if(Q_boxes[i][j] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+      
+   
+  }
+
+  //Check Right Upper Diagonal
+  for ( i = row+1, j = col-1; i <= n && j >=1 ; i++, j--) {
+    if(Q_boxes[i][j] != 1){
+   cnt++;
+   }else{
+       
+       break;
+       
+   }
+  
+  }
+  
+        return 1; 
+
+    } 
+
+   
+   public static int FindingQueens(int Q_boxes[][],int r,int c) 
+    { 
+
+        if (checkConstraints(Q_boxes,r,c)!=0) { 
+     
+                 Q_boxes[r][c] = 1;
+            
+
+            } 
+
+        return 0; 
+    } 
+  
+    
+   public static void main(String args[]) 
+    { 
+ 
+        
+        int ob,r,c,i,r1,c1,b=0;
+        int Q_boxes[][];
+       int []arr = new int[100];
+        
+        Scanner obj = new Scanner(System.in);
+        
+        n = obj.nextInt();
+        
+        if(n<9000){
+            
+              Q_boxes = new int[n+1][n+1];
+        }else{
+            
+             Q_boxes = new int[1000][1000];
+            b=1;
+        }
+
+        ob = obj.nextInt();
+        
+        r = obj.nextInt();
+        c = obj.nextInt();
+        
+        
+        
+        
+        for(i=0;i<ob;i++)
+        {
+            if(b==1){
+                
+                break;
+            }
+            
+            r1 = obj.nextInt();
+            c1 = obj.nextInt();
+            if(i==0){
+                
+                arr[0]=r1;
+                arr[1]=c1;
+                
+            }
+            
+            
+            Q_boxes[r1][c1]=1; 
+  
+        }
+
+            FindingQueens(Q_boxes,r,c);
+            
+        
+         System.out.print(cnt);   
+
+    } 
+   
+   
+}
